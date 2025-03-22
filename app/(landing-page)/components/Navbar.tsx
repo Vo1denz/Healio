@@ -1,5 +1,5 @@
 "use client";
-
+import { UserButton } from '@clerk/nextjs';
 import Image from 'next/image';
 import React from 'react'
 
@@ -12,7 +12,7 @@ const navbar = () => {
       </div>
       <div className="links flex gap-8 items-center">
         <Image src="/images/healio.png" alt="logo" height={120} width={100}/>
-        
+        <UserButton />
       </div>
     </div>
   )
