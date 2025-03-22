@@ -5,6 +5,10 @@ import React, { useEffect } from "react";
 import LandingPage from "./components/LandingPade";
 import Marquee from "./components/Marquee";
 import About from "./components/About";
+import Eyes from "./components/Eyes";
+import Featured from "./components/Featured";
+import Steps from "./components/Steps";
+import Footer from "./components/Footer";
 
 const Page = () => {
   useEffect(() => {
@@ -22,6 +26,10 @@ const Page = () => {
       <LandingPage />
       <Marquee />
       <About />
+      <Eyes />
+      <Featured />
+      <Steps />
+      <Footer />
     </div>
   );
 };
