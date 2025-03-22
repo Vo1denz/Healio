@@ -23,5 +23,11 @@ export default defineSchema({
     note: v.optional(v.string()),
   }).index("by_user", ["userId"]),
 
+  gratitudeEntries: defineTable({
+    userId: v.string(),
+    date: v.string(),
+    gratitude: v.string(),
+  }).index("by_user", ["userId"]),
+
 
 });
