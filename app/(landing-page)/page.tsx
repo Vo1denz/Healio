@@ -4,6 +4,7 @@ import Navbar from "@/app/(landing-page)/components/Navbar";
 import React, { useEffect } from "react";
 import LandingPage from "./components/LandingPade";
 import Marquee from "./components/Marquee";
+import About from "./components/About";
 
 const Page = () => {
   useEffect(() => {
@@ -20,6 +21,7 @@ const Page = () => {
       <Navbar />
       <LandingPage />
       <Marquee />
+      <About />
     </div>
   );
 };
