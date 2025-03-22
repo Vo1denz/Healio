@@ -1,4 +1,5 @@
-import { ClerkProvider, RedirectToSignIn, SignedOut } from "@clerk/nextjs";
+import ConvexClerkProvider from "@/components/providers/ConvexClerkProvider";
+import { RedirectToSignIn, SignedOut } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { League_Spartan } from "next/font/google";
@@ -19,7 +20,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <ClerkProvider>
+    <ConvexClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <ReactLenis root>
           <body className={`${leagueSpartan.className} antialiased bg-background`}>
@@ -41,6 +42,6 @@ export default function RootLayout({
           </body>
         </ReactLenis>
       </html>
-    </ClerkProvider>
+    </ConvexClerkProvider>
   );
 }
