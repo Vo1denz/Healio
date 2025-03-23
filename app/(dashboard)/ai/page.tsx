@@ -5,51 +5,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUp } from "lucide-react";
 import Image from "next/image";
-
-function parseBoldText(text: string) {
-  const parts = text.split(/(\*\*.*?\*\*)/);
-  return parts.map((part: string, index: number) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      return <strong key={index}>{part.slice(2, -2)}</strong>;
-    }
-    return part;
-  });
-}
-
-function parseAndStyleMessage(content: string) {
-  const lines = content.split("\n");
-  let currentHeading = "";
-  let inList = false;
-
-  return lines.map((line: string, index: number) => {
-    if (line.startsWith("**") && line.endsWith("**")) {
-      currentHeading = line.replace(/\*\*/g, "");
-      return (
-        <h2 key={index} className="text-xl font-bold mt-4 mb-2 text-[#314328]">
-          {currentHeading}
-        </h2>
-      );
-    } else if (line.trim().startsWith("*")) {
-      if (!inList) {
-        inList = true;
-        return (
-          <ul key={index} className="list-disc pl-5 mb-2">
-            <li>{parseBoldText(line.trim().substring(1).trim())}</li>
-          </ul>
-        );
-      } else {
-        return <li key={index}>{parseBoldText(line.trim().substring(1).trim())}</li>;
-      }
-    } else {
-      inList = false;
-      return (
-        <p key={index} className="mb-2">
-          {parseBoldText(line)}
-        </p>
-      );
-    }
-  });
-}
+import ReactMarkdown from "react-markdown";
 
 export default function YourCompanionPage() {
   const [messages, setMessages] = useState<{ sender: string; text: string }[]>([]);
@@ -68,7 +24,6 @@ export default function YourCompanionPage() {
   const handleScroll = () => {
     if (chatContainerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
-      // If the user is within 50px of the bottom, enable auto-scroll
       if (scrollHeight - scrollTop - clientHeight < 50) {
         setIsAutoScroll(true);
       } else {
@@ -77,7 +32,6 @@ export default function YourCompanionPage() {
     }
   };
 
-  // Auto-scroll only if enabled
   useEffect(() => {
     if (isAutoScroll) {
       scrollToBottom();
@@ -87,10 +41,8 @@ export default function YourCompanionPage() {
   // Add keyboard navigation for scrolling
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
-
     const handleKeyDown = (event: KeyboardEvent) => {
       if (!chatContainer) return;
-
       if (event.key === "ArrowUp") {
         event.preventDefault();
         chatContainer.scrollTop -= 30;
@@ -100,17 +52,14 @@ export default function YourCompanionPage() {
       } else if (event.key === "ArrowDown") {
         event.preventDefault();
         chatContainer.scrollTop += 30;
-        // Check if we've scrolled to the bottom
         if (chatContainer.scrollHeight - chatContainer.scrollTop - chatContainer.clientHeight < 50) {
           setIsAutoScroll(true);
         }
       }
     };
-
     if (chatContainer) {
       chatContainer.addEventListener("keydown", handleKeyDown);
     }
-
     return () => {
       if (chatContainer) {
         chatContainer.removeEventListener("keydown", handleKeyDown);
@@ -118,11 +67,9 @@ export default function YourCompanionPage() {
     };
   }, []);
 
-  // Enable smooth scrolling for touchpad
-  // Enable smooth scrolling for touchpad
+  // Enable smooth scrolling for touchpad using an EventListener that ignores its event parameter.
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
-    
     if (chatContainer) {
       const handleWheel: EventListener = () => {
         if (chatContainer.scrollHeight - chatContainer.scrollTop - chatContainer.clientHeight < 50) {
@@ -131,31 +78,25 @@ export default function YourCompanionPage() {
           setIsAutoScroll(false);
         }
       };
-      
       chatContainer.addEventListener("wheel", handleWheel, { passive: true });
-      
       return () => {
         chatContainer.removeEventListener("wheel", handleWheel);
       };
     }
   }, []);
 
-
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
-
     const newMessage = { sender: "user", text: input.trim() };
     setMessages([...messages, newMessage]);
     setInput("");
     setIsLoading(true);
-
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: input }),
       });
-
       const data = await response.json();
       const aiMessage = {
         sender: "ai",
@@ -234,7 +175,7 @@ export default function YourCompanionPage() {
                     <span className="inline-block p-2 rounded-lg bg-[#c6e0bf] text-[#314328]">{message.text}</span>
                   ) : (
                     <div className="inline-block p-2 rounded-lg bg-[#d3ddcd]/70 text-[#526D4E] max-w-[80%]">
-                      {parseAndStyleMessage(message.text)}
+                      <ReactMarkdown>{message.text}</ReactMarkdown>
                     </div>
                   )}
                 </motion.div>
@@ -263,7 +204,6 @@ export default function YourCompanionPage() {
                 />
               </motion.div>
             )}
-            {/* Dummy element for scrolling */}
             <div ref={messagesEndRef} />
           </div>
 
