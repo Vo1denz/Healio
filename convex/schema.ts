@@ -58,11 +58,24 @@ export default defineSchema({
     currentUsers: v.number(),
     activeUsers: v.array(v.string()),
   }).index("by_name", ["name"]),
-  
+
   messages: defineTable({
     roomId: v.id("rooms"),
     sender: v.string(),
     text: v.string(),
     timestamp: v.number(),
   }).index("by_room", ["roomId"]),
+
+  feedback: defineTable({
+    rating: v.number(),
+    text: v.string(),
+    createdAt: v.number(),
+  }),
+  
+  fitnessLogs: defineTable({
+    userId: v.string(),
+    workoutType: v.string(),
+    duration: v.number(), // In minutes
+    caloriesBurned: v.number(),
+  }).index("by_user", ["userId"]),
 });
