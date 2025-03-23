@@ -2,15 +2,12 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
-
-  
   users: defineTable({
     name: v.string(),
     email: v.string(),
     image: v.optional(v.string()),
     clerkId: v.string(),
   }).index("by_clerk_id", ["clerkId"]),
-
 
   moodEntries: defineTable({
     userId: v.string(),
@@ -29,5 +26,36 @@ export default defineSchema({
     gratitude: v.string(),
   }).index("by_user", ["userId"]),
 
+  forums: defineTable({
+    title: v.string(),
+    content: v.string(),
+    authorId: v.id("users"),
+    votes: v.optional(v.record(v.string(), v.number())),
+    createdAt: v.number(),
+  })
+    .index("by_author", ["authorId"])
+    .index("by_created", ["createdAt"]),
 
+  forumComments: defineTable({
+    forumId: v.id("forums"),
+    authorId: v.id("users"),
+    content: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_forum", ["forumId"])
+    .index("by_author", ["authorId"]),
+
+  goals: defineTable({
+    userId: v.string(),
+    title: v.string(),
+    completed: v.boolean(),
+    createdAt: v.number(),
+  }).index("byUserId", ["userId"]),
+
+  rooms: defineTable({
+    name: v.string(),
+    maxUsers: v.number(),
+    currentUsers: v.number(),
+    activeUsers: v.array(v.string()),
+  }).index("by_name", ["name"]),
 });

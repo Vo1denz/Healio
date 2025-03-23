@@ -1,6 +1,7 @@
 "use client";
 import { AppSidebar } from "@/components/app-sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
+import { Toaster } from "@/components/ui/toaster";
 import Link from "next/link";
 import React from "react";
 
@@ -8,6 +9,7 @@ import React from "react";
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <SidebarProvider>
+      <Toaster />
       <div className="flex min-h-screen w-full">
         {/* Sidebar */}
         <AppSidebar />
