@@ -13,6 +13,13 @@ import { cn } from "@/lib/utils";
 import { Send, LogOut, Plus, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
+// Define a proper type for messages instead of using "any".
+interface Message {
+  _id: string;
+  sender: string;
+  text: string;
+}
+
 // --- Sub-Components ---
 
 interface ChatHeaderProps {
@@ -34,7 +41,7 @@ const ChatHeader: FC<ChatHeaderProps> = ({ roomName, onLeave }) => (
 );
 
 interface MessageListProps {
-  messages: any[];
+  messages: Message[];
   username: string;
 }
 
@@ -49,7 +56,7 @@ const MessageList: FC<MessageListProps> = ({ messages, username }) => {
       <div className="space-y-4 flex flex-col">
         {messages.map((msg, idx) => (
           <motion.div
-            key={idx}
+            key={msg._id || idx}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}

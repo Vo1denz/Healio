@@ -37,7 +37,7 @@ export default function CheckinPage() {
         description: "Your mood entry has been saved.",
       })
       setShowNewEntry(false)
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to save your mood entry. Please try again.",
@@ -59,7 +59,7 @@ export default function CheckinPage() {
         description: "Your mood entry has been updated.",
       })
       setEditingEntry(null)
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to update your mood entry. Please try again.",
@@ -75,13 +75,13 @@ export default function CheckinPage() {
         title: "Success!",
         description: "Your mood entry has been deleted.",
       })
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to delete your mood entry. Please try again.",
         variant: "destructive",
       })
-      throw error
+      throw new Error("Deletion failed")
     }
   }
 

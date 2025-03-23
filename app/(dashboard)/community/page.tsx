@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Id } from "@/convex/_generated/dataModel";
 import { ThumbsUp, ThumbsDown, MessageCircle, Trash2 } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type Forum = {
   _id: Id<"forums">;
@@ -105,7 +106,9 @@ export default function ForumList() {
             {/* Author Info */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <img
+                <Image 
+                  height={120}
+                  width={120}
                   src={forum.author.image || "https://via.placeholder.com/40"}
                   className="w-10 h-10 rounded-full"
                   alt="Author"
@@ -155,7 +158,9 @@ export default function ForumList() {
                 {forum.comments.map((comment) => (
                   <div key={comment._id} className="mb-3">
                     <div className="flex items-center gap-2">
-                      <img
+                      <Image
+                        height={130}
+                        width={130}
                         src={comment.author.image || "https://via.placeholder.com/30"}
                         className="w-6 h-6 rounded-full"
                         alt="Comment author"
