@@ -143,7 +143,7 @@ export default function DietPage() {
           <h1 className="text-4xl font-semibold text-[#314328] mb-3">
             Hey, {user?.firstName}
           </h1>
-          <p className="text-lg text-gray-600">Here's your personalised diet based on your current mood</p>
+          <p className="text-lg text-gray-600">Here&apos;s your personalised diet based on your current mood</p>
         </motion.div>
 
         <div className="flex flex-col items-center">

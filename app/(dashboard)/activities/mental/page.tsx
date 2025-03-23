@@ -88,7 +88,9 @@ export default function MentalActivities() {
   const toggleAudio = (audioSrc: string) => {
     if (isPlaying && audioSrc === currentAudio) {
       audioRef.current?.pause();
-      audioRef.current!.currentTime = 0;
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+      }
       setIsPlaying(false);
     } else {
       if (currentAudio !== audioSrc) {
@@ -99,9 +101,12 @@ export default function MentalActivities() {
       setIsPlaying(true);
     }
   };
+
   const stopAudio = () => {
     audioRef.current?.pause();
-    audioRef.current!.currentTime = 0;
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0;
+    }
     setIsPlaying(false);
   };
 
@@ -148,13 +153,24 @@ export default function MentalActivities() {
                   <div className="mt-4 flex items-center justify-between">
                     <span className="text-lg font-medium">{sound.label}</span>
                     {isPlaying && currentAudio === sound.audio ? (
-                      <StopCircle className="text-red-500 cursor-pointer" onClick={stopAudio} size={30} />
+                      <StopCircle
+                        className="text-red-500 cursor-pointer"
+                        onClick={stopAudio}
+                        size={30}
+                      />
                     ) : (
-                      <PlayCircle className="w-8 h-8 text-[#314328] hover:scale-110 transition-transform cursor-pointer" />
+                      <PlayCircle
+                        className="w-8 h-8 text-[#314328] hover:scale-110 transition-transform cursor-pointer"
+                        onClick={() => toggleAudio(sound.audio)}
+                      />
                     )}
                   </div>
                   <Dialog>
-                    <DialogTrigger>
+                    <DialogTrigger
+                      asChild
+                      // Set the current video source when opening the dialog
+                      onClick={() => setCurrentVideo(sound.video)}
+                    >
                       <Button className="px-3 py-1 mt-2 text-white bg-[#314328] rounded-lg hover:bg-[#1f2b1f] transition">
                         Watch Video 🎥
                       </Button>

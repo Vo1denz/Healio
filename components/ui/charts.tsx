@@ -28,8 +28,12 @@ const getChartColors = () => {
   ];
 };
 
+interface ChartData {
+  [key: string]: string | number;
+}
+
 interface ChartProps {
-  data: any[];
+  data: ChartData[];
   index: string;
   categories: string[];
   colors?: string[];
@@ -108,7 +112,7 @@ export function LineChart({
 }
 
 interface PieChartProps {
-  data: any[];
+  data: ChartData[];
   index: string;
   category: string;
   colors?: string[];

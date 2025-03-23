@@ -84,7 +84,9 @@ export default function PhysicalActivities() {
             <h1 className="text-5xl font-medium text-[#314328] mb-2">
               Get Moving With These Workouts
             </h1>
-            <p className="text-gray-600">"Explore Activities You Can Do Anytime, Anywhere"</p>
+            <p className="text-gray-600">
+              &quot;Explore Activities You Can Do Anytime, Anywhere&quot;
+            </p>
           </div>
 
           {/* Workouts Section */}
@@ -92,11 +94,11 @@ export default function PhysicalActivities() {
             <div className="space-y-4">
               {workouts.map((workout, index) => (
                 <TooltipProvider key={index}>
-                  <Tooltip delayDuration={200}> {/* Reduced delay to 200ms */}
+                  <Tooltip delayDuration={200}>
                     <TooltipTrigger asChild>
                       <Card
                         className="p-4 bg-[#F9FDF7] rounded-lg cursor-pointer"
-                        onClick={() => handleCardClick(workout)} // Open dialog on click
+                        onClick={() => handleCardClick(workout)}
                       >
                         <div className="flex items-center gap-4">
                           <div className="w-16 h-16 relative rounded-lg overflow-hidden">

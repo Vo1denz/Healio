@@ -112,7 +112,7 @@ export default function UserAnalyticsPage() {
             <Card>
               <CardHeader>
                 <CardTitle>Workout Distribution</CardTitle>
-                <CardDescription>Types of workouts you've done</CardDescription>
+                <CardDescription>Types of workouts you&apos;ve done</CardDescription>
               </CardHeader>
               <CardContent>
                 {fitnessStats.workoutTypes.length > 0 ? (
@@ -253,7 +253,7 @@ export default function UserAnalyticsPage() {
                 <div className="space-y-4">
                   {gratitudeStats.recentEntries.map((entry, index) => (
                     <div key={index} className="p-4 border rounded-lg">
-                      <p className="italic">"{entry.gratitude}"</p>
+                      <p className="italic">&quot;{entry.gratitude}&quot;</p>
                       <p className="text-sm text-muted-foreground mt-2">{new Date(entry.date).toLocaleDateString()}</p>
                     </div>
                   ))}
@@ -349,7 +349,7 @@ export default function UserAnalyticsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Active Goals</CardTitle>
-              <CardDescription>Goals you're currently working on</CardDescription>
+              <CardDescription>Goals you&apos;re currently working on</CardDescription>
             </CardHeader>
             <CardContent>
               {goalsStats.activeGoals.length > 0 ? (
@@ -481,4 +481,3 @@ function getWorkoutIcon(type: string): string {
 
   return typeToIcon[type] || "💪"
 }
-
