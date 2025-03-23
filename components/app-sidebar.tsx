@@ -70,8 +70,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarHeader>
           <Image
             src="/images/healio.png"
-            height={40}
-            width={40}
+            height={120}
+            width={120}
             alt="logo"
             className="w-[100px] h-[80px]"
           />
