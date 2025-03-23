@@ -24,12 +24,12 @@ export default function GratitudePage() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8 }}
-      className="flex flex-col items-center min-h-screen bg-[#FAF0DC] py-10"
+      className="flex flex-col items-center min-h-screen  bg-gradient-to-b from-[#E5F4DD] to-[#D1E6C7] py-10"
     >
       <motion.div className="max-w-2xl w-full px-4">
         {/* Header */}
         <motion.div className="text-center mb-8">
-          <h1 className="text-5xl font-handwritten text-[#5A3825] mb-2">
+          <h1 className="text-5xl font-handwritten text-[#314328] mb-2">
             My Gratitude Journal
           </h1>
           <p className="text-gray-700">
@@ -38,7 +38,7 @@ export default function GratitudePage() {
         </motion.div>
 
         {/* Input Section */}
-        <Card className="p-6 bg-white shadow-lg rounded-xl border border-[#C4A484]">
+        <Card className="p-6 bg-white shadow-lg rounded-xl border">
           <NewEntryDialog onSave={handleAddEntry} />
         </Card>
 
@@ -53,9 +53,9 @@ export default function GratitudePage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative bg-[#FFF9E3] p-6 shadow-lg rounded-xl border border-[#C4A484] diary-page"
+                className="relative bg-[#efffe3] p-6 shadow-lg rounded-xl border border-[#425539] diary-page"
               >
-                <p className="text-lg font-handwritten text-[#5A3825]">{entry.gratitude}</p>
+                <p className="text-lg font-handwritten text-[#314328]">{entry.gratitude}</p>
                 <div className="absolute top-3 left-3 text-xs text-gray-600">
                   {new Date(entry.date).toLocaleDateString()}
                 </div>
