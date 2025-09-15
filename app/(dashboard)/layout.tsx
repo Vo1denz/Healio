@@ -11,21 +11,17 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // ✅ Protect this layout (server-side)
   const { userId } = await auth();
   if (!userId) {
-    redirect("/"); // not logged in → send to homepage
+    redirect("/");
   }
 
-  // ✅ Actual client-side UI
   return (
     <SidebarProvider>
       <Toaster />
       <div className="flex min-h-screen w-full">
-        {/* Sidebar */}
         <AppSidebar />
 
-        {/* Main Content */}
         <main className="flex-1 flex flex-col min-h-screen overflow-hidden bg-[#E5F4DD]">
           <Link
             href="/home"

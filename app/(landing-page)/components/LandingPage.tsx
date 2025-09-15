@@ -22,7 +22,7 @@ function LandingPage() {
       data-scroll-speed="-.8"
       className="w-full h-screen pt-1 bg-[url('/images/hero-img.png')] bg-cover bg-center"
     >
-      <div className="textstructure mt-40 px-20">
+      <div className="textstructure text-[#E5F4DD] mt-40 px-20">
         {["Empowering Your Mind,", "One Step", "at a Time"].map(
           (item, index) => (
             <div key={index} className="masker">
