@@ -5,7 +5,7 @@ Healio is a web-based mental health support platform designed to provide users w
 This is a [Next.js](https://nextjs.org) project 
 
 ## Project Preview 
-[`Vercel`](https://healio-one.vercel.app/)
+[`Vercel link`](https://healio-one.vercel.app/)
 
 ## Features
 - #### User Authentication
